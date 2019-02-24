@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    container_name: web
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./docker/web/Dockerfile
+    volumes:
+      - './:/usr/src/app'
+      - /usr/src/app/node_modules/
+    ports:
+      - 80:3000
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - 27017:27017
+  
