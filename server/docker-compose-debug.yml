@@ -9,9 +9,13 @@ services:
       - './:/usr/src/app'
       - /usr/src/app/node_modules/
     ports:
-      - 3000:3000
+      - 3001:3000
+      - 9229:9229
     links:
       - mongo
+    command:
+      - yarn
+      - debug
   mongo:
     image: mongo
     ports:

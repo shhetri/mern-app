@@ -9,7 +9,7 @@ app.get('/', (_, res: Response) => {
       res.send({ error: 'Can not connect to mongo' })
       return
     }
-    res.send({ success: 'Connected to mongo....' })
+    res.send({ success: 'Connected to mongo. Oka' })
   })
 })
 
