@@ -10,8 +10,8 @@
       "request": "attach",
       "restart": true,
       "sourceMaps": true,
-      "remoteRoot": "/usr/src/app",
-      "localRoot": "${workspaceFolder}/server",
+      "remoteRoot": "/usr/src/app/dist/",
+      "localRoot": "${workspaceFolder}/server/dist/",
       "skipFiles": ["<node_internals>/**"],
       "outFiles": ["${workspaceFolder}/server/dist/**/*.js}"]
     }

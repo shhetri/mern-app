@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "debug": "nodemon --inspect=0.0.0.0:9229 --watch 'src/**/*.ts' --require ts-node/register src/index.ts",
+    "debug": "yarn build && node --inspect=0.0.0.0:9229 ./dist/index.js",
     "build": "tsc",
     "start": "node ./dist/index.js",
     "pretty": "prettier --write \"./**/*.*\"",
