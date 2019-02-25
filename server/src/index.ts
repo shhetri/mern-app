@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import express, { Response } from 'express'
+import logger from './logger/logger'
 
 const app = express()
 
@@ -14,6 +15,5 @@ app.get('/', (_, res: Response) => {
 })
 
 app.listen(3000, () => {
-  // tslint:disable-next-line: no-console
-  console.log('successfully started server.')
+  logger.info('Server successfully started')
 })

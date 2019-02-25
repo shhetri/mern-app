@@ -8,7 +8,11 @@
   "jsRules": {},
   "rules": {
     "ordered-imports": false,
-    "curly": true
+    "curly": true,
+    "object-literal-sort-keys": false,
+    "member-access": false,
+    "match-default-export-name": false,
+    "import-name": false
   },
   "rulesDirectory": []
 }
