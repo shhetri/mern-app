@@ -1,19 +1,8 @@
-import mongoose from 'mongoose'
-import express, { Response } from 'express'
-import logger from './logger/logger'
+import MERNApplication from './application'
 
-const app = express()
+const booststrap = async (): Promise<any> => {
+  const app: MERNApplication = MERNApplication.create()
+  await app.listen(3000)
+}
 
-app.get('/', (_, res: Response) => {
-  mongoose.connect('mongodb://mongo:27017', (err: Error) => {
-    if (err) {
-      res.send({ error: 'Can not connect to mongo' })
-      return
-    }
-    res.send({ success: `Connected to mongo. I have  changed it` })
-  })
-})
-
-app.listen(3000, () => {
-  logger.info('Server successfully started')
-})
+booststrap()
