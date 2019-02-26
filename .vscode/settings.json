@@ -3,6 +3,7 @@
         "booststrap",
         "bootstrapper",
         "mern",
-        "middlewares"
+        "middlewares",
+        "respositories"
     ]
 }
