@@ -12,7 +12,8 @@
     "object-literal-sort-keys": false,
     "member-access": false,
     "match-default-export-name": false,
-    "import-name": false
+    "import-name": false,
+    "interface-name": false
   },
   "rulesDirectory": []
 }
