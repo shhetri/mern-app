@@ -12,6 +12,7 @@
     "lint:fix": "tslint -p . -c tslint.json -t stylish --fix"
   },
   "dependencies": {
+    "bcryptjs": "2.4.3",
     "body-parser": "1.18.3",
     "bunyan": "1.8.12",
     "cors": "2.8.5",
@@ -20,6 +21,7 @@
     "mongoose": "5.4.15"
   },
   "devDependencies": {
+    "@types/bcryptjs": "2.4.2",
     "@types/bunyan": "1.8.5",
     "@types/cors": "2.8.4",
     "@types/dotenv": "6.1.0",

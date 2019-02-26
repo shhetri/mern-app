@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import home from './home'
+import auth from './auth'
 
 const router = Router()
 
-router.use('/home', home)
+router.use('/auth', auth)
 
 export default router
