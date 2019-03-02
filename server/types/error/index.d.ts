@@ -1,5 +1,3 @@
-declare interface HTTPError extends Error {
-  status?: number
+export interface IHTTPError {
+  status: number
 }
-
-export = HTTPError

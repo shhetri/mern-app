@@ -1,5 +1,5 @@
 import { Application, NextFunction, Response, Request } from 'express'
-import HTTPError from '../../types/error'
+import HTTPError from '../errors/http-error'
 
 class ErrorHandler {
   handle(app: Application) {
@@ -11,8 +11,7 @@ class ErrorHandler {
     app.use(
       '*',
       (_: Request, __: Response, next: NextFunction): void => {
-        const error: HTTPError = new Error('Not Found')
-        error.status = 404
+        const error: HTTPError = new HTTPError('Not Found', 404)
 
         next(error)
       }
