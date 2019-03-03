@@ -1,7 +1,21 @@
-import { model, Schema } from 'mongoose'
+import { model, Schema, Document } from 'mongoose'
+import { User } from './user'
+
+export interface Option extends Document {
+  name: string
+  votes: number
+}
+
+export interface Poll extends Document {
+  user: User
+  question: string
+  options: Option[]
+  voted?: User[]
+  created?: Date
+}
 
 const optionSchema: Schema = new Schema({
-  option: String,
+  name: String,
   votes: {
     type: Number,
     default: 0,
@@ -27,4 +41,4 @@ const pollSchema: Schema = new Schema({
   },
 })
 
-export default model('Poll', pollSchema)
+export default model<Poll>('Poll', pollSchema)

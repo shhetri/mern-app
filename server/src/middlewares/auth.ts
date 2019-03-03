@@ -38,7 +38,7 @@ const authMiddleware = (
     const payload = jwt.verify(
       getTokenFromHeader(request),
       process.env.JWT_SECRET
-    ) as object
+    ) as { username: string }
 
     request.user = payload
 

@@ -1,3 +1,3 @@
-import bunyanLogger from './bunyan-logger'
+import logger from './bunyan-logger'
 
-export default bunyanLogger
+export default logger

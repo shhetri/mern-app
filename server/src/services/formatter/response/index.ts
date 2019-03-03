@@ -3,6 +3,7 @@ interface Response {
   data?: { [prop: string]: any }
   code: number
   message: string
+  stack?: string
 }
 
 export const success = (
@@ -21,12 +22,14 @@ export const success = (
 export const error = (
   message?: string,
   code: number = 500,
-  data?: object
+  data?: object,
+  stack?: string
 ): Response => {
   return {
     data,
     code,
     message,
+    stack,
     ok: false,
   }
 }

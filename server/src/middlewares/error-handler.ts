@@ -23,21 +23,40 @@ class ErrorHandler {
   private handleError(app: Application) {
     app.use(
       (
-        error: BaseError,
+        error: Error | BaseError,
         _: Request,
         response: Response,
         __: NextFunction
       ): void => {
         const errorMessage = error.message || 'Something went wrong'
-        response
-          .status(error.status || 500)
-          .json(
-            errorResponse(
-              errorMessage,
-              error.appStatus,
-              error.detail ? error.detail : undefined
+
+        const respondError = (baseError: BaseError): void =>
+          void response
+            .status(baseError.status || 500)
+            .json(
+              errorResponse(
+                errorMessage,
+                baseError.appStatus,
+                baseError.detail ? baseError.detail : undefined,
+                baseError.stack
+              )
             )
-          )
+
+        let newError: BaseError
+
+        if (error instanceof BaseError) {
+          newError = error
+        } else {
+          newError = new BaseError(errorMessage)
+          newError.appStatus = 500
+          newError.status = 500
+        }
+
+        if (process.env.NODE_ENV !== 'production') {
+          newError.stack = error.stack
+        }
+
+        respondError(newError)
       }
     )
   }
