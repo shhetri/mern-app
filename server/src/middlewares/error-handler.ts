@@ -1,5 +1,7 @@
 import { Application, NextFunction, Response, Request } from 'express'
-import HTTPError from '../errors/http-error'
+import BaseError from '../errors/base-error'
+import NotFoundError from '../errors/not-found-error'
+import { error as errorResponse } from '../response'
 
 class ErrorHandler {
   handle(app: Application) {
@@ -11,7 +13,7 @@ class ErrorHandler {
     app.use(
       '*',
       (_: Request, __: Response, next: NextFunction): void => {
-        const error: HTTPError = new HTTPError('Not Found', 404)
+        const error = new NotFoundError('Not Found')
 
         next(error)
       }
@@ -21,14 +23,15 @@ class ErrorHandler {
   private handleError(app: Application) {
     app.use(
       (
-        error: HTTPError,
+        error: BaseError,
         _: Request,
         response: Response,
         __: NextFunction
       ): void => {
-        response.status(error.status || 500).json({
-          error: error.message || 'Something went wrong',
-        })
+        const errorMessage = error.message || 'Something went wrong'
+        response
+          .status(error.status || 500)
+          .json(errorResponse(errorMessage, error.appStatus))
       }
     )
   }

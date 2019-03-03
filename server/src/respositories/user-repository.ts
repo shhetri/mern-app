@@ -2,7 +2,7 @@ import UserModel, { User } from '../models/user'
 import BadRequestError from '../errors/bad-request-error'
 
 class UserRepository {
-  async create(user: User): Promise<User> {
+  async register(user: User): Promise<User> {
     try {
       return await UserModel.create(user)
     } catch (error) {

@@ -1,7 +1,6 @@
-import { Application } from 'express'
+import express, { Application } from 'express'
 import routes from './routes'
 import logger from './logger/logger'
-import express = require('express')
 import errorHandler from './middlewares/error-handler'
 import appMiddleware from './middlewares/app-middleware'
 import databaseConnector from './database/database-connector'

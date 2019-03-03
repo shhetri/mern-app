@@ -1,8 +1,10 @@
-import HTTPError from './http-error'
+import BaseError from './base-error'
 
-class BadRequestError extends HTTPError {
+class BadRequestError extends BaseError {
   constructor(message: string) {
-    super(message, 400)
+    super(message)
+    this.status = 400
+    this.appStatus = 400
   }
 }
 
