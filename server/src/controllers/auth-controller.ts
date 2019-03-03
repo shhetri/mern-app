@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import UserRepository from '../respositories/user-repository'
 import UserService from '../services/user-service'
-import { success } from '../response'
+import { success } from '../services/formatter/response'
 import { User } from '../models/user'
 
 class AuthController {

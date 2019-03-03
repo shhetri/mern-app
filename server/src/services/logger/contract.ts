@@ -1,4 +1,4 @@
-declare interface ILogger {
+interface ILogger {
   trace(value: Error | {} | any, ...params: any[]): void
   info(value: Error | {} | any, ...params: any[]): void
   warn(value: Error | {} | any, ...params: any[]): void
@@ -7,4 +7,4 @@ declare interface ILogger {
   fatal(value: Error | {} | any, ...params: any[]): void
 }
 
-export = ILogger
+export default ILogger

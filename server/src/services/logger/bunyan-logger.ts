@@ -1,5 +1,5 @@
 import bunyan, { LogLevelString } from 'bunyan'
-import ILogger from '../../types/logger'
+import ILogger from './contract'
 
 class BunyanLogger implements ILogger {
   private bunyan: bunyan

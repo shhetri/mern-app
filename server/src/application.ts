@@ -1,9 +1,9 @@
 import express, { Application } from 'express'
 import routes from './routes'
-import logger from './logger/logger'
+import logger from './services/logger/logger'
 import errorHandler from './middlewares/error-handler'
-import appMiddleware from './middlewares/app-middleware'
-import databaseConnector from './database/database-connector'
+import appMiddleware from './middlewares'
+import databaseConnector from './services/database/database-connector'
 
 class MERNApplication {
   static create(): MERNApplication {

@@ -25,7 +25,7 @@ const getTokenFromHeader = (request: Request): string => {
   return token
 }
 
-export const authMiddleware = (
+const authMiddleware = (
   request: Request,
   _: Response,
   next: NextFunction
@@ -59,3 +59,5 @@ export const authMiddleware = (
     return next(error)
   }
 }
+
+export default authMiddleware

@@ -1,7 +1,7 @@
 import { Application, NextFunction, Response, Request } from 'express'
 import BaseError from '../errors/base-error'
 import NotFoundError from '../errors/not-found-error'
-import { error as errorResponse } from '../response'
+import { error as errorResponse } from '../services/formatter/response'
 
 class ErrorHandler {
   handle(app: Application) {
@@ -31,7 +31,13 @@ class ErrorHandler {
         const errorMessage = error.message || 'Something went wrong'
         response
           .status(error.status || 500)
-          .json(errorResponse(errorMessage, error.appStatus))
+          .json(
+            errorResponse(
+              errorMessage,
+              error.appStatus,
+              error.detail ? error.detail : undefined
+            )
+          )
       }
     )
   }
