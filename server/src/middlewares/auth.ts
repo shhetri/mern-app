@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import UnauthorizedError from '../errors/unauthorized-error'
+import UserRepository from '../respositories/user-repository'
 
 const dontAuthenticatePaths: string[] = [
   '/api/auth/register',
@@ -25,11 +26,11 @@ const getTokenFromHeader = (request: Request): string => {
   return token
 }
 
-const authMiddleware = (
+const authMiddleware = async (
   request: Request,
   _: Response,
   next: NextFunction
-): void => {
+): Promise<any> => {
   if (dontAuthenticatePaths.includes(request.path)) {
     return next()
   }
@@ -40,7 +41,15 @@ const authMiddleware = (
       process.env.JWT_SECRET
     ) as { username: string }
 
-    request.user = payload
+    const user = await new UserRepository().findOne({
+      username: payload.username,
+    })
+
+    if (!user) {
+      throw new UnauthorizedError('User with the provided token does not exist')
+    }
+
+    request.user = user
 
     next()
   } catch (error) {
