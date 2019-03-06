@@ -5,15 +5,7 @@ import { registerRules, loginRules } from '../validation-rules/auth'
 
 const router = Router()
 
-router.post(
-  '/register',
-  validator(registerRules),
-  authController.register.bind(authController)
-)
-router.post(
-  '/login',
-  validator(loginRules),
-  authController.login.bind(authController)
-)
+router.post('/register', validator(registerRules), authController.register)
+router.post('/login', validator(loginRules), authController.login)
 
 export default router

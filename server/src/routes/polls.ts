@@ -1,15 +1,11 @@
 import { Router } from 'express'
 import pollsController from '../controllers/polls-controller'
+import { findPollRules } from '../validation-rules/polls'
 import validator from '../middlewares/validator'
-import { createPollRules } from '../validation-rules/polls'
 
 const router = Router()
 
-router.post(
-  '/',
-  validator(createPollRules),
-  pollsController.create.bind(pollsController)
-)
-router.get('/', pollsController.index.bind(pollsController))
+router.get('/', pollsController.index)
+router.get('/:id', validator(findPollRules), pollsController.find)
 
 export default router

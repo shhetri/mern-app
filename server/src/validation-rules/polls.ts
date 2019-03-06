@@ -11,3 +11,20 @@ export const createPollRules = {
       .required(),
   }),
 }
+
+export const findPollRules = {
+  params: Joi.object().keys({
+    id: Joi.string()
+      .trim()
+      .required(),
+  }),
+}
+
+export const voteRules = {
+  ...findPollRules,
+  body: Joi.object().keys({
+    option: Joi.string()
+      .trim()
+      .required(),
+  }),
+}

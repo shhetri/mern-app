@@ -1,34 +1,45 @@
 import { Request, Response, NextFunction } from 'express'
-import PollService from '../services/poll-service'
 import { success } from '../services/formatter/response'
 import logger from '../services/logger/logger'
+import PollRepository from '../respositories/poll-repository'
+import NotFoundError from '../errors/not-found-error'
 
 class PollsController {
-  private readonly pollService = new PollService()
+  private readonly pollRepository = new PollRepository()
 
-  async index(request: Request, response: Response, next: NextFunction) {
+  index = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<any> => {
     try {
-      const user = request.user
-      await user.populate('polls').execPopulate()
-      response.status(200).json(success({ polls: user.polls }))
+      const polls = await this.pollRepository.findAll()
+      response.status(200).json(success({ polls }))
     } catch (error) {
       logger.error({ req: request, err: error }, 'Error getting polls of user')
       next(error)
     }
   }
 
-  async create(request: Request, response: Response, next: NextFunction) {
+  find = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<any> => {
+    const id = request.params.id
     try {
-      const user = request.user
-      const poll = await this.pollService.create(request.body, user)
-      user.polls.push(poll.id)
-      await user.save()
+      const poll = await this.pollRepository.findById(id)
 
-      response
-        .status(201)
-        .json(success({ poll }, 201, 'Poll successfully created'))
+      if (!poll) {
+        throw new NotFoundError('Poll with the given id does not exist')
+      }
+
+      response.json(success({ poll }))
     } catch (error) {
-      logger.error({ req: request, err: error }, 'Error creating poll')
+      logger.error(
+        { req: request, err: error },
+        `Error finding the poll with id: ${id}`
+      )
       next(error)
     }
   }

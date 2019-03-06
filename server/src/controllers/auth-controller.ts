@@ -14,11 +14,11 @@ class AuthController {
     this.userService = new UserService()
   }
 
-  async register(
+  register = async (
     request: Request,
     response: Response,
     next: NextFunction
-  ): Promise<any> {
+  ): Promise<any> => {
     try {
       const user: User = await this.userRepository.register(request.body)
 
@@ -29,11 +29,11 @@ class AuthController {
     }
   }
 
-  async login(
+  login = async (
     request: Request,
     response: Response,
     next: NextFunction
-  ): Promise<any> {
+  ): Promise<any> => {
     try {
       const { username, password } = request.body
       const authenticatedUserWithToken: {
