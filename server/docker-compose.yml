@@ -1,10 +1,12 @@
 version: '3'
 services:
-  web:
+  server:
     restart: always
     build:
       context: ./
-      dockerfile: ./docker/web/Dockerfile
+      dockerfile: ./docker/server/Dockerfile
+    networks:
+      - server
     volumes:
       - './:/usr/src/app'
       - /usr/src/app/node_modules/
@@ -16,3 +18,7 @@ services:
     image: mongo
     ports:
       - 27017:27017
+    networks:
+      - server
+networks:
+  server:
