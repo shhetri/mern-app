@@ -6,6 +6,7 @@
         "bootstrapper",
         "mern",
         "middlewares",
-        "respositories"
+        "respositories",
+        "zeit"
     ]
 }
