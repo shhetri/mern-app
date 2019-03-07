@@ -1,0 +1,32 @@
+version: '3'
+services:
+  client:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./docker/client/Dockerfile
+    volumes:
+      - './client:/usr/src/app'
+      - /usr/src/app/node_modules/
+    ports:
+      - 8080:8080
+  server:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./docker/server/Dockerfile
+    volumes:
+      - './server:/usr/src/app'
+      - /usr/src/app/node_modules/
+    ports:
+      - 3000:3000
+      - 9229:9229
+    links:
+      - mongo
+    command:
+      - yarn
+      - debug
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017

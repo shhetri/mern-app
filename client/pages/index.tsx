@@ -1,7 +1,20 @@
-import { FunctionComponent } from 'react'
+import { NextFunctionComponent } from 'next'
+import axios from 'axios'
 
-const hello: FunctionComponent = () => {
-  return <div>Hello World From Docker</div>
+const Hello: NextFunctionComponent = () => {
+  return <div>Works and updated. As seen. ok finally</div>
 }
 
-export default hello
+Hello.getInitialProps = async () => {
+  try {
+    await axios.get('http://server:3000')
+    // tslint:disable-next-line: no-console
+    console.log('success')
+  } catch (error) {
+    // tslint:disable-next-line: no-console
+    console.debug(error, 'error occurred')
+  }
+  return {}
+}
+
+export default Hello
