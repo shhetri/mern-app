@@ -7,7 +7,7 @@ services:
       dockerfile: ./docker/client/Dockerfile
     volumes:
       - './client:/usr/src/app'
-      - /usr/src/app/node_modules/
+      - /usr/src/app/node_modules
     ports:
       - 8080:8080
   server:
@@ -17,7 +17,7 @@ services:
       dockerfile: ./docker/server/Dockerfile
     volumes:
       - './server:/usr/src/app'
-      - /usr/src/app/node_modules/
+      - /usr/src/app/node_modules
     ports:
       - 3000:3000
     links:
