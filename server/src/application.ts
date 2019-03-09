@@ -39,7 +39,7 @@ class MERNApplication {
   }
 
   private registerMiddlewares(): void {
-    appMiddleware.register(this.app)
+    appMiddleware.registerGlobalMiddleware(this.app)
   }
 
   private connectDatabase(): void {
