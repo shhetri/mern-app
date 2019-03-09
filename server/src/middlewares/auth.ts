@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken'
 import UnauthorizedError from '../errors/unauthorized-error'
 import UserRepository from '../respositories/user-repository'
 
+const dontAuthenticatePaths: string[] = []
+
 const getTokenFromHeader = (request: Request): string => {
   const bearerToken = request.header('Authorization')
 
@@ -26,6 +28,10 @@ const authMiddleware = async (
   _: Response,
   next: NextFunction
 ): Promise<any> => {
+  if (dontAuthenticatePaths.includes(request.path)) {
+    return next()
+  }
+
   try {
     const payload = jwt.verify(
       getTokenFromHeader(request),
